@@ -1,0 +1,39 @@
+﻿@model List<Category>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning">No Category Found</div>
+    }
+    else{
+    <!-- /.card-header -->
+
+      
+        <table class="table table-bordered" role="table">
+            <thead>
+                <tr>
+                    <th style="width: 10px" scope="col">#</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var category in Model)
+                {
+                    <tr class="align-middle">
+                        <td>@category.Id</td>
+                        <td>@category.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table> 
+    }
+    <!-- /.card-body -->
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-end">
+            <li class="page-item"><a class="page-link" href="#">«</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">»</a></li>
+        </ul>
+    </div>
+    

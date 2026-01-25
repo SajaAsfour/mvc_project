@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using KASHOP.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace KASHOP.Data
 {
     public class ApplicationDbContext : DbContext
     {
+        public DbSet<Category> categories   { get; set; } 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
