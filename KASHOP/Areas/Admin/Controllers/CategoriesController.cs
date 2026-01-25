@@ -1,4 +1,5 @@
 ﻿using KASHOP.Data;
+using KASHOP.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KASHOP.Areas.Admin.Controllers
@@ -11,6 +12,22 @@ namespace KASHOP.Areas.Admin.Controllers
         {
             var categories = context.categories.ToList();
             return View(categories);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        public IActionResult Store(Category request)
+        {
+            if (ModelState.IsValid) {
+                var category = context.categories.Add(request);
+                context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View("create" ,request);
+            
         }
     }
 }
