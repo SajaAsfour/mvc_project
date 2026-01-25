@@ -10,6 +10,7 @@
                 <tr>
                     <th style="width: 10px" scope="col">#</th>
                     <th scope="col">Name</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -18,6 +19,8 @@
                     <tr class="align-middle">
                         <td>@category.Id</td>
                         <td>@category.Name</td>
+                        <td> <a class="btn btn-danger" asp-controller="categories" 
+                            asp-action="remove" asp-route-id="@category.Id">Delete</a></td>
                     </tr>
                 }
             </tbody>
