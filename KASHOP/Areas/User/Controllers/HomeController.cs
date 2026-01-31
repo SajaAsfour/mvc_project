@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KASHOP.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KASHOP.Areas.User.Controllers
 {
     [Area("User")]
     public class HomeController : Controller
     {
+        ApplicationDbContext context= new ApplicationDbContext();
         public IActionResult Index()
         {
-            return View();
+            var categories = context.categories.ToList();
+            return View(categories);
         }
     }
 }
