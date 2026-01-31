@@ -19,8 +19,17 @@
                     <tr class="align-middle">
                         <td>@category.Id</td>
                         <td>@category.Name</td>
-                        <td> <a class="btn btn-danger" asp-controller="categories" 
-                            asp-action="remove" asp-route-id="@category.Id">Delete</a></td>
+                        <td> 
+                            <a class="btn btn-danger" asp-controller="categories" 
+                            asp-action="remove" asp-route-id="@category.Id">Delete
+                             </a>
+
+                             <a class="btn btn-info" asp-controller="categories" asp-action="edit" 
+                             asp-route-id="@category.Id">Edit
+                             </a>
+
+                        </td>
+                         
                     </tr>
                 }
             </tbody>

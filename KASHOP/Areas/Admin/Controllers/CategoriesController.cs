@@ -30,6 +30,23 @@ namespace KASHOP.Areas.Admin.Controllers
             
         }
 
+        public IActionResult Edit(int id)
+        {
+            var category = context.categories.Find(id);
+
+            return View(category);
+        }
+
+        public IActionResult Update (Category request)
+        {
+            if (ModelState.IsValid)
+            {
+                context.categories.Update(request);
+                context.SaveChanges(); 
+                return RedirectToAction(nameof(Index));
+            }
+            return View("Edit",request);
+        }
         public IActionResult Remove(int id) 
         {
             var category = context.categories.Find(id);
