@@ -16,6 +16,7 @@ namespace KASHOP.Models
         public decimal Price { get; set; }
         public double Rate { get; set; }
         public string? Image {  get; set; }
+        [Display(Name ="Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
     }

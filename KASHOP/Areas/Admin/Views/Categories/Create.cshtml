@@ -2,7 +2,7 @@
 
 <form asp-controller="categories" asp-action="Store" method="post">
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Category Name</label>
+        <label asp-for="Name" class="form-label"></label>
         <input asp-for=Name class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         <span class="text-danger" asp-validation-for="Name"></span>
         <button class="btn btn-success">Create</button>
