@@ -3,8 +3,8 @@
 <form asp-controller="categories" asp-action="Update" method="post">
     <div class="mb-3">
         <input type="hidden" asp-for="Id" />
-        <label for="exampleInputEmail1" class="form-label">Category Name</label>
-        <input asp-for=Name class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+         <label for="exampleInputEmail1" class="form-label">Category Name</label>
+         <input asp-for=Name class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         <span class="text-danger" asp-validation-for="Name"></span>
         <button class="btn btn-success">Save</button>
     </div>

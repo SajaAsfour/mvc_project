@@ -1,6 +1,6 @@
 ﻿@model Product
 
-<form asp-controller="products" asp-action="Store" method="post" enctype="multipart/form-data">
+<form asp-controller="products" asp-action="Update" method="post" enctype="multipart/form-data">
     <div class="mb-3">
         <label asp-for="Name" class="form-label"></label>
         <input asp-for="Name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -38,9 +38,9 @@
         <label asp-for="CategoryId" class="form-label"></label>
         <select class="form-select" asp-for="CategoryId">
             @foreach (var item in ViewBag.categories)
-                {
-                   <option value="@item.Id">@item.Name</option>
-                }
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
         </select>
         <span class="text-danger" asp-validation-for="CategoryId"></span>
     </div>
