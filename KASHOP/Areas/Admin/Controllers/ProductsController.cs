@@ -2,7 +2,7 @@
 using KASHOP.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using KASHOP.Models.ViewModels;
 namespace KASHOP.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -12,8 +12,18 @@ namespace KASHOP.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var products = context.products.Include(p=>p.Category).ToList();
-            
-            return View(products);
+            var productsVm = new List<ProductsViewModel>();
+            foreach (var product in products)
+            {
+                var vm = new ProductsViewModel
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Image = $"/Images/{product.Image}"
+                };
+                productsVm.Add(vm);
+            }
+            return View(productsVm);
         }
 
         public IActionResult Create()
