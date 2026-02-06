@@ -1,6 +1,8 @@
 ﻿using KASHOP.Data;
 using KASHOP.Models;
+using KASHOP.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace KASHOP.Areas.Admin.Controllers
 {
@@ -10,43 +12,78 @@ namespace KASHOP.Areas.Admin.Controllers
         ApplicationDbContext context = new ApplicationDbContext();
         public IActionResult Index()
         {
-            var categories = context.categories.ToList();
-            return View(categories);
+            var categories = context.categories.Include(p => p.Products).ToList();
+            var categoriesVm = new List<CategoriesViewModel>();
+            foreach (var category in categories)
+            {
+                var vm = new CategoriesViewModel
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                };
+                categoriesVm.Add(vm);
+            }
+            return View(categoriesVm);
         }
 
         public IActionResult Create()
         {
-            return View();
+            return View(new CategoriesViewModel());
         }
 
-        public IActionResult Store(Category request)
+
+        public IActionResult Store(CategoriesViewModel request)
         {
-            if (ModelState.IsValid) {
-                var category = context.categories.Add(request);
+            if (ModelState.IsValid)
+            {
+                var category = new Category
+                {
+                    Name = request.Name
+                };
+
+                context.categories.Add(category);
                 context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
-            return View("create" ,request);
-            
+
+            return View("Create", request);
         }
+
 
         public IActionResult Edit(int id)
         {
             var category = context.categories.Find(id);
 
-            return View(category);
+            var vm = new CategoriesViewModel
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+
+            return View(vm);
         }
 
-        public IActionResult Update (Category request)
+
+        public IActionResult Update(CategoriesViewModel request)
         {
             if (ModelState.IsValid)
             {
-                context.categories.Update(request);
-                context.SaveChanges(); 
+                var category = new Category
+                {
+                    Id = request.Id,
+                    Name = request.Name
+                };
+
+                context.categories.Update(category);
+                context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
-            return View("Edit",request);
+
+            return View("Edit", request);
         }
+
         public IActionResult Remove(int id) 
         {
             var category = context.categories.Find(id);

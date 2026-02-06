@@ -11,8 +11,18 @@ namespace KASHOP.Areas.User.Controllers
         ApplicationDbContext context= new ApplicationDbContext();
         public IActionResult Index()
         {
-            var categories = context.categories.ToList();
-            return View(categories);
+            var categories = context.categories.Include(p => p.Products).ToList();
+            var categoriesVm = new List<CategoriesViewModel>();
+            foreach (var category in categories)
+            {
+                var vm = new CategoriesViewModel
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                };
+                categoriesVm.Add(vm);
+            }
+            return View(categoriesVm);
         }
 
         public IActionResult ByCategory(int id)
