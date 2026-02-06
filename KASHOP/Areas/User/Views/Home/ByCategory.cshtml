@@ -1,0 +1,32 @@
+﻿@model List<KASHOP.Models.ViewModels.ProductsViewModel>
+
+<h2 class="mb-4">@ViewBag.CategoryName Products</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="text-center mt-5">
+        <h3>No Products Available</h3>
+        <p>This category does not contain any products yet.</p>
+    </div>
+}
+else
+{
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+        @foreach (var product in Model)
+        {
+            <div class="col mb-5">
+                <div class="card h-100">
+
+                    <img class="card-img-top" src="~/images/@product.Image" />
+
+                    <div class="card-body p-4 text-center">
+                        <h5 class="fw-bolder">@product.Name</h5>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+}
